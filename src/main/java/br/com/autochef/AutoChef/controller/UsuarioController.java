@@ -34,5 +34,4 @@ public class UsuarioController {
         return ResponseEntity.created(uri).body(new RegisterUserDto(user));
     }
 
-    @RequestBody
 }
