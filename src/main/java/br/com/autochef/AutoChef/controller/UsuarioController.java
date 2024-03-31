@@ -33,4 +33,6 @@ public class UsuarioController {
         var uri = uriBuilder.path("/investimentos/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(new RegisterUserDto(user));
     }
+
+    @RequestBody
 }
