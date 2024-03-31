@@ -1,8 +1,8 @@
 package br.com.autochef.AutoChef.controller;
 
-import br.com.autochef.AutoChef.dto.userDto.DetailsUserDto;
-import br.com.autochef.AutoChef.dto.userDto.RegisterUserDto;
-import br.com.autochef.AutoChef.dto.userDto.UpdateuserDto;
+import br.com.autochef.AutoChef.dto.UserDto.DetailsUserDto;
+import br.com.autochef.AutoChef.dto.UserDto.RegisterUserDto;
+import br.com.autochef.AutoChef.dto.UserDto.UpdateUserDto;
 import br.com.autochef.AutoChef.model.User;
 import br.com.autochef.AutoChef.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +26,22 @@ public class UsuarioController {
     //Médoto para cadastrar
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterUserDto> post(@RequestBody RegisterUserDto registerUserDto, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<RegisterUserDto> post(@RequestBody RegisterUserDto registerUserDto,
+                                                UriComponentsBuilder uriBuilder) {
         var user = new User(registerUserDto);
         userRepository.save(user);
-        var uri = uriBuilder.path("/investimentos/{id}").buildAndExpand(user.getId()).toUri();
+        var uri = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(new RegisterUserDto(user));
     }
 
     //Método para atualização - Name, Email, Password
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<UpdateuserDto> put(@PathVariable("id")Long id,
-                                                       @RequestBody UpdateuserDto dto){
+    public ResponseEntity<UpdateUserDto> put(@PathVariable("id")Long id,
+                                             @RequestBody UpdateUserDto udp){
         var user = userRepository.getReferenceById(id);
-        user.update(dto);
-        return ResponseEntity.ok(new UpdateuserDto(user));
+        user.update(udp);
+        return ResponseEntity.ok(new UpdateUserDto(user));
     }
 
     //Método para deletar um cadastro
@@ -54,7 +55,6 @@ public class UsuarioController {
     //Método que vai retornar um usuario pelo seu id
     @GetMapping("{id}")
     public ResponseEntity<DetailsUserDto> getby(@PathVariable("id") Long id){
-        Pageable pg = PageRequest.of(0, 1, Sort.by("id").ascending());
         var user = userRepository.getReferenceById(id);
         return ResponseEntity.ok(new DetailsUserDto(user));
     }

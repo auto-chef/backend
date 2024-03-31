@@ -1,4 +1,4 @@
-package br.com.autochef.AutoChef.dto.userDto;
+package br.com.autochef.AutoChef.dto.UserDto;
 
 import br.com.autochef.AutoChef.model.User;
 

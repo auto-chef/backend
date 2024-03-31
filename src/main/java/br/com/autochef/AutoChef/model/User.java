@@ -1,8 +1,8 @@
 package br.com.autochef.AutoChef.model;
 
-import br.com.autochef.AutoChef.dto.userDto.DetailsUserDto;
-import br.com.autochef.AutoChef.dto.userDto.RegisterUserDto;
-import br.com.autochef.AutoChef.dto.userDto.UpdateuserDto;
+import br.com.autochef.AutoChef.dto.UserDto.DetailsUserDto;
+import br.com.autochef.AutoChef.dto.UserDto.RegisterUserDto;
+import br.com.autochef.AutoChef.dto.UserDto.UpdateUserDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -40,16 +40,10 @@ public class User {
         birthDate = registerUserDto.birthDate();
     }
 
-    public void update(UpdateuserDto updateuserDto){
+    public void update(UpdateUserDto updateuserDto){
         name = updateuserDto.name();
         email = updateuserDto.email();
         password = updateuserDto.password();
     }
 
-    public void getby(DetailsUserDto dto){
-        name = dto.name();
-        cpf = dto.cpf();
-        email = dto.email();
-        birthDate = dto.birthDate();
-    }
 }
