@@ -40,6 +40,7 @@ public class ProductModel {
         name = registerProduct.name();
         price = registerProduct.price();
         productCategory = registerProduct.productCategory();
+
     }
 
 }
