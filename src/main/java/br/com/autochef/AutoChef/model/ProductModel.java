@@ -1,6 +1,5 @@
 package br.com.autochef.AutoChef.model;
 
-import br.com.autochef.AutoChef.dto.product.DetailsProductDTO;
 import br.com.autochef.AutoChef.dto.product.RegisterProductDTO;
 import br.com.autochef.AutoChef.dto.product.UpdateProductDTO;
 import br.com.autochef.AutoChef.enums.ProductCategory;
