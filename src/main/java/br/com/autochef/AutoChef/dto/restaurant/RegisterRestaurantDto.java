@@ -2,8 +2,10 @@ package br.com.autochef.AutoChef.dto.restaurant;
 
 import br.com.autochef.AutoChef.model.RestaurantModel;
 
-public record RegisterRestaurantDto(String name, String cnpj, String imageUrl, Float longitude,
-                                    Float latitude, String email, String password) {
+import java.math.BigDecimal;
+
+public record RegisterRestaurantDto(String name, String cnpj, String imageUrl, BigDecimal longitude,
+                                    BigDecimal latitude, String email, String password) {
 
     public RegisterRestaurantDto(RestaurantModel restaurant){
 

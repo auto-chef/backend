@@ -23,7 +23,7 @@ public class UsuarioController {
     @Autowired
     private UserRepository userRepository;
 
-    //Médoto para cadastrar
+    //Method for registering a new user
     @PostMapping
     @Transactional
     public ResponseEntity<RegisterUserDto> post(@RequestBody RegisterUserDto registerUserDto,
@@ -34,7 +34,7 @@ public class UsuarioController {
         return ResponseEntity.created(uri).body(new RegisterUserDto(user));
     }
 
-    //Método para atualização - Name, Email, Password
+    //Method for updating a user's registration
     @PutMapping("{id}")
     @Transactional
     public ResponseEntity<UpdateUserDto> put(@PathVariable("id")Long id,
@@ -44,7 +44,7 @@ public class UsuarioController {
         return ResponseEntity.ok(new UpdateUserDto(user));
     }
 
-    //Método para deletar um cadastro
+    //Method to delete a user's registration
     @DeleteMapping("{id}")
     @Transactional
     public ResponseEntity<Void> delete(@PathVariable("id") Long id){
@@ -52,14 +52,15 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
-    //Método que vai retornar um usuario pelo seu id
+    //
+    //Method to search for a user by ID
     @GetMapping("{id}")
     public ResponseEntity<DetailsUserDto> getby(@PathVariable("id") Long id){
         var user = userRepository.getReferenceById(id);
         return ResponseEntity.ok(new DetailsUserDto(user));
     }
 
-    //Método que retorna todos os usuarios cadastrados ordenado por id
+    //Method to search all users
     @GetMapping
     public ResponseEntity<List<RegisterUserDto>> get(Pageable pageable){
         Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),

@@ -2,10 +2,7 @@ package br.com.autochef.AutoChef.model;
 
 import br.com.autochef.AutoChef.dto.user.RegisterUserDto;
 import br.com.autochef.AutoChef.dto.user.UpdateUserDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,18 +13,30 @@ import java.time.LocalDate;
 @Getter@Setter
 @AllArgsConstructor@NoArgsConstructor
 @Entity
-@Table(name="Tb_User")
+@Table(name="TB_USER")
 public class UserModel {
-
 
     @Id
     @GeneratedValue
+    @Column(name="ID_USER")
     private Long id;
+
+    @Column(name="NM_USER", nullable = false, length = 255)
     private String name;
+
+    @Column(name="NR_CPF", nullable = false, length = 11)
     private String cpf;
+
+    @Column(name="DS_EMAIL", nullable = false, length = 255)
     private String email;
+
+    @Column(name="NM_PASSWORD", nullable = false, length = 255)
     private String password;
+
+    @Column(name="DT_REGISTRATION", nullable = false)
     private LocalDate registrationDate;
+
+    @Column(name="DT_BIRTHDATE", nullable = false)
     private LocalDate birthDate;
 
     public UserModel(RegisterUserDto registerUserDto){
