@@ -1,9 +1,9 @@
 package br.com.autochef.AutoChef.controller;
 
-import br.com.autochef.AutoChef.dto.UserDto.DetailsUserDto;
-import br.com.autochef.AutoChef.dto.UserDto.RegisterUserDto;
-import br.com.autochef.AutoChef.dto.UserDto.UpdateUserDto;
-import br.com.autochef.AutoChef.model.User;
+import br.com.autochef.AutoChef.dto.user.DetailsUserDto;
+import br.com.autochef.AutoChef.dto.user.RegisterUserDto;
+import br.com.autochef.AutoChef.dto.user.UpdateUserDto;
+import br.com.autochef.AutoChef.model.UserModel;
 import br.com.autochef.AutoChef.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -28,7 +28,7 @@ public class UsuarioController {
     @Transactional
     public ResponseEntity<RegisterUserDto> post(@RequestBody RegisterUserDto registerUserDto,
                                                 UriComponentsBuilder uriBuilder) {
-        var user = new User(registerUserDto);
+        var user = new UserModel(registerUserDto);
         userRepository.save(user);
         var uri = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(new RegisterUserDto(user));

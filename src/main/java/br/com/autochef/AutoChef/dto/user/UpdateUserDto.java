@@ -1,10 +1,10 @@
-package br.com.autochef.AutoChef.dto.UserDto;
+package br.com.autochef.AutoChef.dto.user;
 
-import br.com.autochef.AutoChef.model.User;
+import br.com.autochef.AutoChef.model.UserModel;
 
 public record UpdateUserDto(String name, String email, String password) {
 
-    public UpdateUserDto(User user){
+    public UpdateUserDto(UserModel user){
         this(user.getName(), user.getEmail(), user.getPassword());
     }
 

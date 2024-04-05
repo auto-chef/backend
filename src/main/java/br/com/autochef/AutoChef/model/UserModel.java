@@ -1,8 +1,7 @@
 package br.com.autochef.AutoChef.model;
 
-import br.com.autochef.AutoChef.dto.UserDto.DetailsUserDto;
-import br.com.autochef.AutoChef.dto.UserDto.RegisterUserDto;
-import br.com.autochef.AutoChef.dto.UserDto.UpdateUserDto;
+import br.com.autochef.AutoChef.dto.user.RegisterUserDto;
+import br.com.autochef.AutoChef.dto.user.UpdateUserDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor@NoArgsConstructor
 @Entity
 @Table(name="Tb_User")
-public class User {
+public class UserModel {
 
 
     @Id
@@ -31,7 +30,7 @@ public class User {
     private LocalDate registrationDate;
     private LocalDate birthDate;
 
-    public User(RegisterUserDto registerUserDto){
+    public UserModel(RegisterUserDto registerUserDto){
         name = registerUserDto.name();
         cpf = registerUserDto.cpf();
         email = registerUserDto.email();

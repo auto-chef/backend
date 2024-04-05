@@ -1,12 +1,10 @@
 package br.com.autochef.AutoChef.controller;
 
-import br.com.autochef.AutoChef.dto.RestaurantDto.DetailsRestDto;
-import br.com.autochef.AutoChef.dto.RestaurantDto.RegisterRestaurantDto;
-import br.com.autochef.AutoChef.dto.RestaurantDto.UpdateRestaurantDto;
-import br.com.autochef.AutoChef.dto.UserDto.DetailsUserDto;
-import br.com.autochef.AutoChef.dto.UserDto.RegisterUserDto;
-import br.com.autochef.AutoChef.model.Restaurant;
-import br.com.autochef.AutoChef.repository.RepositoryRestaurant;
+import br.com.autochef.AutoChef.dto.restaurant.DetailsRestaurantDto;
+import br.com.autochef.AutoChef.dto.restaurant.RegisterRestaurantDto;
+import br.com.autochef.AutoChef.dto.restaurant.UpdateRestaurantDto;
+import br.com.autochef.AutoChef.model.RestaurantModel;
+import br.com.autochef.AutoChef.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,14 +21,14 @@ import java.util.List;
 public class RestaurantController {
 
     @Autowired
-    private RepositoryRestaurant repositoryRestaurant;
+    private RestaurantRepository repositoryRestaurant;
 
 
     @PostMapping
     @Transactional
     public ResponseEntity<RegisterRestaurantDto> post(@RequestBody RegisterRestaurantDto registerRestaurantDto,
                                                       UriComponentsBuilder uriBuilder){
-        var restaurant = new Restaurant(registerRestaurantDto);
+        var restaurant = new RestaurantModel(registerRestaurantDto);
         repositoryRestaurant.save(restaurant);
         var uri = uriBuilder.path("/restaurants/{id}").buildAndExpand(restaurant.getId()).toUri();
         return  ResponseEntity.created(uri).body(new RegisterRestaurantDto(restaurant));
@@ -53,17 +51,17 @@ public class RestaurantController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<DetailsRestDto> getby(@PathVariable("id") Long id){
+    public ResponseEntity<DetailsRestaurantDto> getby(@PathVariable("id") Long id){
         var restaurant = repositoryRestaurant.getReferenceById(id);
-        return ResponseEntity.ok(new DetailsRestDto(restaurant));
+        return ResponseEntity.ok(new DetailsRestaurantDto(restaurant));
     }
 
     @GetMapping
-    public ResponseEntity<List<DetailsRestDto>> get(Pageable pageable){
+    public ResponseEntity<List<DetailsRestaurantDto>> get(Pageable pageable){
         Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.by("id").ascending());
         var listaRestDto = repositoryRestaurant.findAll(pg).stream().
-                map(DetailsRestDto::new).toList();
+                map(DetailsRestaurantDto::new).toList();
         return ResponseEntity.ok(listaRestDto);
     }
 }

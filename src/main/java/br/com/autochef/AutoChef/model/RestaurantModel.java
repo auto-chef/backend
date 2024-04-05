@@ -1,9 +1,8 @@
 package br.com.autochef.AutoChef.model;
 
 
-import br.com.autochef.AutoChef.dto.RestaurantDto.DetailsRestDto;
-import br.com.autochef.AutoChef.dto.RestaurantDto.RegisterRestaurantDto;
-import br.com.autochef.AutoChef.dto.RestaurantDto.UpdateRestaurantDto;
+import br.com.autochef.AutoChef.dto.restaurant.RegisterRestaurantDto;
+import br.com.autochef.AutoChef.dto.restaurant.UpdateRestaurantDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +15,7 @@ import lombok.Setter;
 @Entity
 
 @Table(name="TB_RESTAURANT")
-public class Restaurant {
+public class RestaurantModel {
 
     @Id
     @GeneratedValue
@@ -29,7 +28,7 @@ public class Restaurant {
     private String email;
     private String password;
 
-    public Restaurant(RegisterRestaurantDto rest){
+    public RestaurantModel(RegisterRestaurantDto rest){
 
         name = rest.name();
         cnpj = rest.cnpj();
