@@ -19,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("orderItens")//localhost:8080/orderItens
+@RequestMapping("order-items") // http://localhost:8080/order-items
 public class OrderItemController {
 
     @Autowired
@@ -27,33 +27,34 @@ public class OrderItemController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterOrderItemDTO> post(@RequestBody RegisterOrderItemDTO registerOrderItemDTO,
-                                                     UriComponentsBuilder uriBuilder){
+    public ResponseEntity<RegisterOrderItemDTO> createOrderItem(@RequestBody RegisterOrderItemDTO registerOrderItemDTO, UriComponentsBuilder uriBuilder){
         var orderItem = new OrderItemModel(registerOrderItemDTO);
         orderitemRepository.save(orderItem);
-        var uri = uriBuilder.path("/orderItens/{id}").buildAndExpand(orderItem.getId()).toUri();
+
+        var uri = uriBuilder.path("/order-items/{id}").buildAndExpand(orderItem.getId()).toUri();
         return  ResponseEntity.created(uri).body(new RegisterOrderItemDTO(orderItem));
     }
 
     @DeleteMapping("{id}")
     @Transactional
-    public ResponseEntity<DetailsOrderItemDTO> delete(@PathVariable("id") Long id){
+    public ResponseEntity<DetailsOrderItemDTO> deleteOrderItem(@PathVariable("id") Long id){
         orderitemRepository.deleteById(id);
+
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<DetailsOrderItemDTO>> getAll(Pageable pageable){
-        Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
-                Sort.by("id").ascending());
-        var listOrderItem = orderitemRepository.findAll(pg).stream().
-                map(DetailsOrderItemDTO::new).toList();
+    public ResponseEntity<List<DetailsOrderItemDTO>> getAllOrderItems(Pageable pageable){
+        Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending());
+        var listOrderItem = orderitemRepository.findAll(pg).stream().map(DetailsOrderItemDTO::new).toList();
+
         return ResponseEntity.ok(listOrderItem);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<DetailsOrderItemDTO> getby(@PathVariable("id") Long id){
+    public ResponseEntity<DetailsOrderItemDTO> getOrderItemById(@PathVariable("id") Long id){
         var orderItem = orderitemRepository.getReferenceById(id);
+        
         return ResponseEntity.ok(new DetailsOrderItemDTO(orderItem));
     }
 }

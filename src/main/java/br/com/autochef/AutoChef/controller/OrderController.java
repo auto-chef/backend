@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("orders")
+@RequestMapping("orders") // http://localhost:8080/orders
 public class OrderController {
     @Autowired
     private OrderRepository orderRepository;

@@ -17,14 +17,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("users") // http://localhost:8080/users
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterUserDTO> post(@RequestBody RegisterUserDTO registerUserDto, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<RegisterUserDTO> createUser(@RequestBody RegisterUserDTO registerUserDto, UriComponentsBuilder uriBuilder) {
         var user = new UserModel(registerUserDto);
         userRepository.save(user);
 
@@ -34,7 +34,7 @@ public class UserController {
 
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<UpdateUserDTO> put(@PathVariable("id")Long id, @RequestBody UpdateUserDTO udp){
+    public ResponseEntity<UpdateUserDTO> updateUser(@PathVariable("id")Long id, @RequestBody UpdateUserDTO udp){
         var user = userRepository.getReferenceById(id);
         user.update(udp);
 
@@ -43,24 +43,24 @@ public class UserController {
 
     @DeleteMapping("{id}")
     @Transactional
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id){
         userRepository.deleteById(id);
 
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<DetailsUserDTO> getby(@PathVariable("id") Long id){
+    public ResponseEntity<DetailsUserDTO> getUserById(@PathVariable("id") Long id){
         var user = userRepository.getReferenceById(id);
 
         return ResponseEntity.ok(new DetailsUserDTO(user));
     }
 
     @GetMapping
-    public ResponseEntity<List<RegisterUserDTO>> get(Pageable pageable){
+    public ResponseEntity<List<RegisterUserDTO>> getUserList(Pageable pageable){
         Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending());
-
         var userList = userRepository.findAll(pg).stream().map(RegisterUserDTO::new).toList();
+
         return ResponseEntity.ok(userList);
     }
 }
