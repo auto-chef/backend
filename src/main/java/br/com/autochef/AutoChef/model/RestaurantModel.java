@@ -29,7 +29,7 @@ public class RestaurantModel {
     @Column(name="NR_CNPJ",nullable = false, length = 14)
     private String cnpj;
 
-    @Column(name="DS_IMAGE_URL",nullable = false, length = 14)
+    @Column(name="DS_IMAGE_URL",nullable = false)
     private String imageUrl;
 
     @Column(name="NR_LONGITUDE",nullable = false, precision = 2, scale = 5)
