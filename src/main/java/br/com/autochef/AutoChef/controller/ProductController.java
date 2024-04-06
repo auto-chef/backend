@@ -25,21 +25,21 @@ public class ProductController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterProductDTO> createProduct(@RequestBody RegisterProductDTO registerProduct, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<DetailsProductDTO> createProduct(@RequestBody RegisterProductDTO registerProduct, UriComponentsBuilder uriBuilder){
         var product = new ProductModel(registerProduct);
         productRepository.save(product);
 
         var uri = uriBuilder.path("/products/{id}").buildAndExpand(product.getId()).toUri();
-        return  ResponseEntity.created(uri).body(new RegisterProductDTO(product));
+        return  ResponseEntity.created(uri).body(new DetailsProductDTO(product));
     }
 
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<UpdateProductDTO> updateProduct(@PathVariable("id") Long id, @RequestBody UpdateProductDTO updateProductDTO){
+    public ResponseEntity<DetailsProductDTO> updateProduct(@PathVariable("id") Long id, @RequestBody UpdateProductDTO updateProductDTO){
         var productUpdate = productRepository.getReferenceById(id);
         productUpdate.update(updateProductDTO);
 
-        return ResponseEntity.ok(new UpdateProductDTO(productUpdate));
+        return ResponseEntity.ok(new DetailsProductDTO(productUpdate));
     }
 
     @DeleteMapping("{id}")
