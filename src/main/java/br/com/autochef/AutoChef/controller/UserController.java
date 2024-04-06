@@ -24,21 +24,21 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterUserDTO> createUser(@RequestBody RegisterUserDTO registerUserDto, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DetailsUserDTO> createUser(@RequestBody RegisterUserDTO registerUserDto, UriComponentsBuilder uriBuilder) {
         var user = new UserModel(registerUserDto);
         userRepository.save(user);
 
         var uri = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(new RegisterUserDTO(user));
+        return ResponseEntity.created(uri).body(new DetailsUserDTO(user));
     }
 
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<UpdateUserDTO> updateUser(@PathVariable("id")Long id, @RequestBody UpdateUserDTO udp){
+    public ResponseEntity<DetailsUserDTO> updateUser(@PathVariable("id")Long id, @RequestBody UpdateUserDTO udp){
         var user = userRepository.getReferenceById(id);
         user.update(udp);
 
-        return ResponseEntity.ok(new UpdateUserDTO(user));
+        return ResponseEntity.ok(new DetailsUserDTO(user));
     }
 
     @DeleteMapping("{id}")
@@ -57,9 +57,9 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RegisterUserDTO>> getUserList(Pageable pageable){
+    public ResponseEntity<List<DetailsUserDTO>> getUserList(Pageable pageable){
         Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending());
-        var userList = userRepository.findAll(pg).stream().map(RegisterUserDTO::new).toList();
+        var userList = userRepository.findAll(pg).stream().map(DetailsUserDTO::new).toList();
 
         return ResponseEntity.ok(userList);
     }
