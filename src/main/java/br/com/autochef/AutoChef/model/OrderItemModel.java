@@ -26,9 +26,8 @@ public class OrderItemModel {
     private int amount;
 
     public OrderItemModel(RegisterOrderItemDTO registerOrderItemDTO){
-
-        orderChange = registerOrderItemDTO.orderChange();
-        amount = registerOrderItemDTO.amount();
+        this.orderChange = registerOrderItemDTO.changes();
+        this.amount = registerOrderItemDTO.amount();
     }
 
 }
