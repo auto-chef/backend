@@ -1,7 +1,7 @@
 package br.com.autochef.AutoChef.model;
 
-import br.com.autochef.AutoChef.dto.user.RegisterUserDto;
-import br.com.autochef.AutoChef.dto.user.UpdateUserDto;
+import br.com.autochef.AutoChef.dto.user.RegisterUserDTO;
+import br.com.autochef.AutoChef.dto.user.UpdateUserDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,7 +39,7 @@ public class UserModel {
     @Column(name="DT_BIRTHDATE", nullable = false)
     private LocalDate birthDate;
 
-    public UserModel(RegisterUserDto registerUserDto){
+    public UserModel(RegisterUserDTO registerUserDto){
         name = registerUserDto.name();
         cpf = registerUserDto.cpf();
         email = registerUserDto.email();
@@ -48,7 +48,7 @@ public class UserModel {
         birthDate = registerUserDto.birthDate();
     }
 
-    public void update(UpdateUserDto updateuserDto){
+    public void update(UpdateUserDTO updateuserDto){
         name = updateuserDto.name();
         email = updateuserDto.email();
         password = updateuserDto.password();

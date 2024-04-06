@@ -1,8 +1,8 @@
 package br.com.autochef.AutoChef.controller;
 
-import br.com.autochef.AutoChef.dto.restaurant.DetailsRestaurantDto;
-import br.com.autochef.AutoChef.dto.restaurant.RegisterRestaurantDto;
-import br.com.autochef.AutoChef.dto.restaurant.UpdateRestaurantDto;
+import br.com.autochef.AutoChef.dto.restaurant.DetailsRestaurantDTO;
+import br.com.autochef.AutoChef.dto.restaurant.RegisterRestaurantDTO;
+import br.com.autochef.AutoChef.dto.restaurant.UpdateRestaurantDTO;
 import br.com.autochef.AutoChef.model.RestaurantModel;
 import br.com.autochef.AutoChef.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +26,22 @@ public class RestaurantController {
     //Method that will insert a new restaurant
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterRestaurantDto> post(@RequestBody RegisterRestaurantDto registerRestaurantDto,
+    public ResponseEntity<RegisterRestaurantDTO> post(@RequestBody RegisterRestaurantDTO registerRestaurantDto,
                                                       UriComponentsBuilder uriBuilder){
         var restaurant = new RestaurantModel(registerRestaurantDto);
         restaurantRepository.save(restaurant);
         var uri = uriBuilder.path("/restaurants/{id}").buildAndExpand(restaurant.getId()).toUri();
-        return  ResponseEntity.created(uri).body(new RegisterRestaurantDto(restaurant));
+        return  ResponseEntity.created(uri).body(new RegisterRestaurantDTO(restaurant));
     }
 
     //Method that will update a restaurant's registration
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<UpdateRestaurantDto> put(@PathVariable("id")Long id,
-                                                   @RequestBody UpdateRestaurantDto udp){
+    public ResponseEntity<UpdateRestaurantDTO> put(@PathVariable("id")Long id,
+                                                   @RequestBody UpdateRestaurantDTO udp){
         var rest = restaurantRepository.getReferenceById(id);
         rest.update(udp);
-        return ResponseEntity.ok(new UpdateRestaurantDto((rest)));
+        return ResponseEntity.ok(new UpdateRestaurantDTO((rest)));
     }
 
     //Method that will delete a restaurant's registration
@@ -54,18 +54,18 @@ public class RestaurantController {
 
     //Method that will search by restaurant ID
     @GetMapping("{id}")
-    public ResponseEntity<DetailsRestaurantDto> getby(@PathVariable("id") Long id){
+    public ResponseEntity<DetailsRestaurantDTO> getby(@PathVariable("id") Long id){
         var restaurant = restaurantRepository.getReferenceById(id);
-        return ResponseEntity.ok(new DetailsRestaurantDto(restaurant));
+        return ResponseEntity.ok(new DetailsRestaurantDTO(restaurant));
     }
 
     //Method that searches all registered restaurants
     @GetMapping
-    public ResponseEntity<List<DetailsRestaurantDto>> get(Pageable pageable){
+    public ResponseEntity<List<DetailsRestaurantDTO>> get(Pageable pageable){
         Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.by("id").ascending());
         var listaRestDto = restaurantRepository.findAll(pg).stream().
-                map(DetailsRestaurantDto::new).toList();
+                map(DetailsRestaurantDTO::new).toList();
         return ResponseEntity.ok(listaRestDto);
     }
 }

@@ -1,8 +1,8 @@
 package br.com.autochef.AutoChef.controller;
 
-import br.com.autochef.AutoChef.dto.user.DetailsUserDto;
-import br.com.autochef.AutoChef.dto.user.RegisterUserDto;
-import br.com.autochef.AutoChef.dto.user.UpdateUserDto;
+import br.com.autochef.AutoChef.dto.user.DetailsUserDTO;
+import br.com.autochef.AutoChef.dto.user.RegisterUserDTO;
+import br.com.autochef.AutoChef.dto.user.UpdateUserDTO;
 import br.com.autochef.AutoChef.model.UserModel;
 import br.com.autochef.AutoChef.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +24,21 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterUserDto> post(@RequestBody RegisterUserDto registerUserDto, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<RegisterUserDTO> post(@RequestBody RegisterUserDTO registerUserDto, UriComponentsBuilder uriBuilder) {
         var user = new UserModel(registerUserDto);
         userRepository.save(user);
 
         var uri = uriBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(new RegisterUserDto(user));
+        return ResponseEntity.created(uri).body(new RegisterUserDTO(user));
     }
 
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<UpdateUserDto> put(@PathVariable("id")Long id, @RequestBody UpdateUserDto udp){
+    public ResponseEntity<UpdateUserDTO> put(@PathVariable("id")Long id, @RequestBody UpdateUserDTO udp){
         var user = userRepository.getReferenceById(id);
         user.update(udp);
 
-        return ResponseEntity.ok(new UpdateUserDto(user));
+        return ResponseEntity.ok(new UpdateUserDTO(user));
     }
 
     @DeleteMapping("{id}")
@@ -50,17 +50,17 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<DetailsUserDto> getby(@PathVariable("id") Long id){
+    public ResponseEntity<DetailsUserDTO> getby(@PathVariable("id") Long id){
         var user = userRepository.getReferenceById(id);
 
-        return ResponseEntity.ok(new DetailsUserDto(user));
+        return ResponseEntity.ok(new DetailsUserDTO(user));
     }
 
     @GetMapping
-    public ResponseEntity<List<RegisterUserDto>> get(Pageable pageable){
+    public ResponseEntity<List<RegisterUserDTO>> get(Pageable pageable){
         Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending());
 
-        var userList = userRepository.findAll(pg).stream().map(RegisterUserDto::new).toList();
+        var userList = userRepository.findAll(pg).stream().map(RegisterUserDTO::new).toList();
         return ResponseEntity.ok(userList);
     }
 }

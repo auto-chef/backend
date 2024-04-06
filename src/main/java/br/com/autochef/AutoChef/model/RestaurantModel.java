@@ -1,7 +1,7 @@
 package br.com.autochef.AutoChef.model;
 
-import br.com.autochef.AutoChef.dto.restaurant.RegisterRestaurantDto;
-import br.com.autochef.AutoChef.dto.restaurant.UpdateRestaurantDto;
+import br.com.autochef.AutoChef.dto.restaurant.RegisterRestaurantDTO;
+import br.com.autochef.AutoChef.dto.restaurant.UpdateRestaurantDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,7 +44,7 @@ public class RestaurantModel {
     @Column(name="DS_PASSWORD",nullable = false, length = 255)
     private String password;
 
-    public RestaurantModel(RegisterRestaurantDto registerRestaurantDto){
+    public RestaurantModel(RegisterRestaurantDTO registerRestaurantDto){
 
         name = registerRestaurantDto.name();
         cnpj = registerRestaurantDto.cnpj();
@@ -55,7 +55,7 @@ public class RestaurantModel {
         password = registerRestaurantDto.password();
     }
 
-    public void update(UpdateRestaurantDto updateRestaurantDto){
+    public void update(UpdateRestaurantDTO updateRestaurantDto){
         name = updateRestaurantDto.name();
         email = updateRestaurantDto.email();
         password = updateRestaurantDto.password();
