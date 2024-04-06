@@ -26,22 +26,22 @@ public class RestaurantController {
     //Method that will insert a new restaurant
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterRestaurantDTO> createRestaurant(@RequestBody RegisterRestaurantDTO registerRestaurantDto, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<DetailsRestaurantDTO> createRestaurant(@RequestBody RegisterRestaurantDTO registerRestaurantDto, UriComponentsBuilder uriBuilder){
         var restaurant = new RestaurantModel(registerRestaurantDto);
         restaurantRepository.save(restaurant);
 
         var uri = uriBuilder.path("/restaurants/{id}").buildAndExpand(restaurant.getId()).toUri();
-        return  ResponseEntity.created(uri).body(new RegisterRestaurantDTO(restaurant));
+        return  ResponseEntity.created(uri).body(new DetailsRestaurantDTO(restaurant));
     }
 
     //Method that will update a restaurant's registration
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<UpdateRestaurantDTO> updateRestaurant(@PathVariable("id") Long id, @RequestBody UpdateRestaurantDTO udp){
+    public ResponseEntity<DetailsRestaurantDTO> updateRestaurant(@PathVariable("id") Long id, @RequestBody UpdateRestaurantDTO udp){
         var rest = restaurantRepository.getReferenceById(id);
         rest.update(udp);
 
-        return ResponseEntity.ok(new UpdateRestaurantDTO((rest)));
+        return ResponseEntity.ok(new DetailsRestaurantDTO((rest)));
     }
 
     //Method that will delete a restaurant's registration

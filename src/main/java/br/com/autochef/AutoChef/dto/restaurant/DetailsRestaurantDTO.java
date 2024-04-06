@@ -4,9 +4,9 @@ import br.com.autochef.AutoChef.model.RestaurantModel;
 
 import java.math.BigDecimal;
 
-public record DetailsRestaurantDTO(String name, String imageUrl, BigDecimal longitude, BigDecimal latitude) {
+public record DetailsRestaurantDTO(Long id, String name, String imageUrl, BigDecimal longitude, BigDecimal latitude) {
 
-    public DetailsRestaurantDTO(RestaurantModel rest){
-        this(rest.getName(), rest.getImageUrl(), rest.getLatitude(), rest.getLongitude());
+    public DetailsRestaurantDTO(RestaurantModel restaurant){
+        this(restaurant.getId(), restaurant.getName(), restaurant.getImageUrl(), restaurant.getLatitude(), restaurant.getLongitude());
     }
 }
