@@ -14,18 +14,16 @@ import lombok.Setter;
 @Table(name="TB_ORDER")
 public class OrderModel {
 
-    //este
-    //
     @Id
     @GeneratedValue
-    @Column(name="id_order")
+    @Column(name="ID_ORDER")
     private Long id;
     @Enumerated(EnumType.STRING)
-    @Column(name="st_order", nullable = false, length = 20)
+    @Column(name="ST_ORDER", nullable = false, length = 20)
     private OrderStatus status = OrderStatus.PENDING;
-    @Column(name="ds_feedback")
+    @Column(name="DS_FEEDBACK")
     private String feedbackDescription;
-    @Column(name="nr_rate")
+    @Column(name="NR_RATE")
     private Integer feedbackRate;
 
     public void updateData(UpdateOrderDTO updateOrderDTO) {
