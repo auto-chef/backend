@@ -1,11 +1,4 @@
 package br.com.autochef.AutoChef.dto.orderItem;
 
-import br.com.autochef.AutoChef.model.OrderItemModel;
-
 public record RegisterOrderItemDTO(String orderChange, int amount) {
-
-    public RegisterOrderItemDTO(OrderItemModel orderItemModel){
-
-        this(orderItemModel.getOrderChange(), orderItemModel.getAmount());
-    }
 }

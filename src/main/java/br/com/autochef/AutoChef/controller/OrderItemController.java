@@ -27,12 +27,12 @@ public class OrderItemController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterOrderItemDTO> createOrderItem(@RequestBody RegisterOrderItemDTO registerOrderItemDTO, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<DetailsOrderItemDTO> createOrderItem(@RequestBody RegisterOrderItemDTO registerOrderItemDTO, UriComponentsBuilder uriBuilder){
         var orderItem = new OrderItemModel(registerOrderItemDTO);
         orderitemRepository.save(orderItem);
 
         var uri = uriBuilder.path("/order-items/{id}").buildAndExpand(orderItem.getId()).toUri();
-        return  ResponseEntity.created(uri).body(new RegisterOrderItemDTO(orderItem));
+        return  ResponseEntity.created(uri).body(new DetailsOrderItemDTO(orderItem));
     }
 
     @DeleteMapping("{id}")

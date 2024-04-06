@@ -25,21 +25,21 @@ public class OrderController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<RegisterOrderDTO> createOrder(UriComponentsBuilder uriBuilder){
+    public ResponseEntity<DetailsOrderDTO> createOrder(UriComponentsBuilder uriBuilder) {
         var order = new OrderModel();
         orderRepository.save(order);
 
         var uri = uriBuilder.path("/orders/{id}").buildAndExpand(order.getId()).toUri();
-        return  ResponseEntity.created(uri).body(new RegisterOrderDTO(order));
+        return  ResponseEntity.created(uri).body(new DetailsOrderDTO(order));
     }
 
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<UpdateOrderDTO> updateOrder(@PathVariable("id")Long id, @RequestBody UpdateOrderDTO updateOrderDTO){
+    public ResponseEntity<DetailsOrderDTO> updateOrder(@PathVariable("id")Long id, @RequestBody UpdateOrderDTO updateOrderDTO){
         var order = orderRepository.getReferenceById(id);
         order.updateData(updateOrderDTO);
 
-        return ResponseEntity.ok(new UpdateOrderDTO(order));
+        return ResponseEntity.ok(new DetailsOrderDTO(order));
     }
 
     @DeleteMapping("{id}")
