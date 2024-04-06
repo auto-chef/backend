@@ -40,14 +40,14 @@ public class ProductModel {
         imageUrl = registerProduct.imageUrl();
         name = registerProduct.name();
         price = registerProduct.price();
-        productCategory = registerProduct.productCategory();
+        productCategory = registerProduct.category();
 
     }
 
     public void update(UpdateProductDTO updateProductDTO){
-        imageUrl = updateProductDTO.imageUrl();
-        name = updateProductDTO.name();
-        price = updateProductDTO.price();
+        if(updateProductDTO.imageUrl() != null) imageUrl = updateProductDTO.imageUrl();
+        if(updateProductDTO.name() != null) name = updateProductDTO.name();
+        if(updateProductDTO.price() != null) price = updateProductDTO.price();
     }
 
 }
