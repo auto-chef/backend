@@ -32,10 +32,10 @@ public class RestaurantModel {
     @Column(name="DS_IMAGE_URL",nullable = false)
     private String imageUrl;
 
-    @Column(name="NR_LONGITUDE",nullable = false, precision = 2, scale = 5)
+    @Column(name="NR_LONGITUDE",nullable = false, precision = 18, scale = 16)
     private BigDecimal longitude;
 
-    @Column(name="NR_LATITUDE",nullable = false, precision = 2, scale = 5)
+    @Column(name="NR_LATITUDE",nullable = false, precision = 18, scale = 16)
     private BigDecimal latitude;
 
     @Column(name="DS_EMAIL",nullable = false, length = 255)
@@ -56,11 +56,11 @@ public class RestaurantModel {
     }
 
     public void update(UpdateRestaurantDTO updateRestaurantDto){
-        name = updateRestaurantDto.name();
-        email = updateRestaurantDto.email();
-        password = updateRestaurantDto.password();
-        imageUrl = updateRestaurantDto.imageUrl();
-        longitude = updateRestaurantDto.longitude();
-        latitude = updateRestaurantDto.latitude();
+        if(updateRestaurantDto.name() != null) name = updateRestaurantDto.name();
+        if(updateRestaurantDto.email() != null) email = updateRestaurantDto.email();
+        if(updateRestaurantDto.password() != null) password = updateRestaurantDto.password();
+        if(updateRestaurantDto.imageUrl() != null) imageUrl = updateRestaurantDto.imageUrl();
+        if(updateRestaurantDto.longitude() != null) longitude = updateRestaurantDto.longitude();
+        if(updateRestaurantDto.latitude() != null) latitude = updateRestaurantDto.latitude();
     }
 }
