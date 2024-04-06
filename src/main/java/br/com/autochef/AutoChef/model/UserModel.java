@@ -7,13 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@Getter@Setter
-@AllArgsConstructor@NoArgsConstructor
+@Getter @Setter
+@AllArgsConstructor @NoArgsConstructor
+
 @Entity
 @Table(name="TB_USER")
+@EntityListeners(AuditingEntityListener.class)
 public class UserModel {
 
     @Id
@@ -33,8 +38,9 @@ public class UserModel {
     @Column(name="NM_PASSWORD", nullable = false, length = 255)
     private String password;
 
-    @Column(name="DT_REGISTRATION", nullable = false)
-    private LocalDate registrationDate;
+    @CreatedDate
+    @Column(name="DT_REGISTRATION", nullable = false, updatable = false)
+    private LocalDateTime registrationDate;
 
     @Column(name="DT_BIRTHDATE", nullable = false)
     private LocalDate birthDate;
@@ -44,14 +50,13 @@ public class UserModel {
         cpf = registerUserDto.cpf();
         email = registerUserDto.email();
         password = registerUserDto.password();
-        registrationDate = registerUserDto.registrationDate();
         birthDate = registerUserDto.birthDate();
     }
 
     public void update(UpdateUserDTO updateuserDto){
-        name = updateuserDto.name();
-        email = updateuserDto.email();
-        password = updateuserDto.password();
+        if(updateuserDto.name() != null) this.name = updateuserDto.name();
+        if(updateuserDto.email() != null) email = updateuserDto.email();
+        if(updateuserDto.password() != null)  password = updateuserDto.password();
     }
 
 }
