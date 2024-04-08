@@ -11,7 +11,7 @@ Além disso, as empresas de alimentos e restaurantes enfrentam dificuldades em a
 
 Portanto, o AutoChef busca resolver esses desafios ao oferecer uma plataforma inovadora que permite aos usuários fazerem pedidos personalizados com antecedência, priorizando a entrega de acordo com a distância e fornecendo recomendações de alimentos relevantes, garantindo uma experiência de Drive Thru mais conveniente e satisfatória tanto para os consumidores quanto para as empresas com a utilização de Inteligência Artificial Generativa e Deep Analytics.
 
-Você pode acessar o [vídeo pitch de apresentação do projeto]() para obter mais informações.
+Você pode acessar o [vídeo pitch de apresentação do projeto](https://www.youtube.com/watch?v=eDRL7UrAchQ) para obter mais informações.
 
 ## 👥 Equipe
 Este projeto está sendo desenvolvido pelos seguintes integrantes da turma 2TDSPV:
