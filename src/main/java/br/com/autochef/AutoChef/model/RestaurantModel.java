@@ -16,10 +16,8 @@ import java.math.BigDecimal;
 
 @Table(name="TB_RESTAURANT")
 public class RestaurantModel {
-
     @Id
     @GeneratedValue
-
     @Column(name="ID_RESTAURANT")
     private Long id;
 
@@ -45,22 +43,21 @@ public class RestaurantModel {
     private String password;
 
     public RestaurantModel(RegisterRestaurantDTO registerRestaurantDto){
-
-        name = registerRestaurantDto.name();
-        cnpj = registerRestaurantDto.cnpj();
-        imageUrl = registerRestaurantDto.imageUrl();
-        longitude = registerRestaurantDto.longitude();
-        latitude = registerRestaurantDto.latitude();
-        email = registerRestaurantDto.email();
-        password = registerRestaurantDto.password();
+        this.name = registerRestaurantDto.name();
+        this.cnpj = registerRestaurantDto.cnpj();
+        this.imageUrl = registerRestaurantDto.imageUrl();
+        this.longitude = registerRestaurantDto.longitude();
+        this.latitude = registerRestaurantDto.latitude();
+        this.email = registerRestaurantDto.email();
+        this.password = registerRestaurantDto.password();
     }
 
     public void update(UpdateRestaurantDTO updateRestaurantDto){
-        if(updateRestaurantDto.name() != null) name = updateRestaurantDto.name();
-        if(updateRestaurantDto.email() != null) email = updateRestaurantDto.email();
-        if(updateRestaurantDto.password() != null) password = updateRestaurantDto.password();
-        if(updateRestaurantDto.imageUrl() != null) imageUrl = updateRestaurantDto.imageUrl();
-        if(updateRestaurantDto.longitude() != null) longitude = updateRestaurantDto.longitude();
-        if(updateRestaurantDto.latitude() != null) latitude = updateRestaurantDto.latitude();
+        if(updateRestaurantDto.name() != null) this.name = updateRestaurantDto.name();
+        if(updateRestaurantDto.email() != null) this.email = updateRestaurantDto.email();
+        if(updateRestaurantDto.password() != null) this.password = updateRestaurantDto.password();
+        if(updateRestaurantDto.imageUrl() != null) this.imageUrl = updateRestaurantDto.imageUrl();
+        if(updateRestaurantDto.longitude() != null) this.longitude = updateRestaurantDto.longitude();
+        if(updateRestaurantDto.latitude() != null) this.latitude = updateRestaurantDto.latitude();
     }
 }

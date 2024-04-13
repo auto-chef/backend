@@ -15,13 +15,14 @@ import org.aspectj.weaver.ast.Or;
 @Entity
 @Table(name = "TB_ORDER_ITEM")
 public class OrderItemModel {
-
     @Id
     @GeneratedValue
     @Column(name = "ID_ITEM")
     private Long id;
+    
     @Column(name = "DS_ORDER_CHANGE", nullable = false, length = 255)
     private String orderChange;
+
     @Column(name = "DS_AMOUNT", nullable = false, precision = 3)
     private int amount;
 

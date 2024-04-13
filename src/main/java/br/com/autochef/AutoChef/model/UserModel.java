@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 @Table(name="TB_USER")
 @EntityListeners(AuditingEntityListener.class)
 public class UserModel {
-
     @Id
     @GeneratedValue
     @Column(name="ID_USER")
@@ -46,17 +45,17 @@ public class UserModel {
     private LocalDate birthDate;
 
     public UserModel(RegisterUserDTO registerUserDto){
-        name = registerUserDto.name();
-        cpf = registerUserDto.cpf();
-        email = registerUserDto.email();
-        password = registerUserDto.password();
-        birthDate = registerUserDto.birthDate();
+        this.name = registerUserDto.name();
+        this.cpf = registerUserDto.cpf();
+        this.email = registerUserDto.email();
+        this.password = registerUserDto.password();
+        this.birthDate = registerUserDto.birthDate();
     }
 
     public void update(UpdateUserDTO updateuserDto){
         if(updateuserDto.name() != null) this.name = updateuserDto.name();
-        if(updateuserDto.email() != null) email = updateuserDto.email();
-        if(updateuserDto.password() != null)  password = updateuserDto.password();
+        if(updateuserDto.email() != null) this.email = updateuserDto.email();
+        if(updateuserDto.password() != null) this.password = updateuserDto.password();
     }
 
 }

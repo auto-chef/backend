@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="TB_PRODUCT")
 public class ProductModel {
-
     @Id
     @GeneratedValue
     @Column(name="ID_PRODUCT")
@@ -37,17 +36,17 @@ public class ProductModel {
     private ProductCategory productCategory;
 
     public ProductModel(RegisterProductDTO registerProduct){
-        imageUrl = registerProduct.imageUrl();
-        name = registerProduct.name();
-        price = registerProduct.price();
-        productCategory = registerProduct.category();
+        this.imageUrl = registerProduct.imageUrl();
+        this.name = registerProduct.name();
+        this.price = registerProduct.price();
+        this.productCategory = registerProduct.category();
 
     }
 
     public void update(UpdateProductDTO updateProductDTO){
-        if(updateProductDTO.imageUrl() != null) imageUrl = updateProductDTO.imageUrl();
-        if(updateProductDTO.name() != null) name = updateProductDTO.name();
-        if(updateProductDTO.price() != null) price = updateProductDTO.price();
+        if(updateProductDTO.imageUrl() != null) this.imageUrl = updateProductDTO.imageUrl();
+        if(updateProductDTO.name() != null) this.name = updateProductDTO.name();
+        if(updateProductDTO.price() != null) this.price = updateProductDTO.price();
     }
 
 }
