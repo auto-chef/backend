@@ -22,6 +22,12 @@ Este projeto está sendo desenvolvido pelos seguintes integrantes da turma 2TDSP
 - RM551886 - Victor Luca do Nascimento Queiroz `(Desenvolvedor JAVA)`
 - RM99455 - Vinícius Martins Torres Abdala `(DBA e Cientista de dados)`
 
+## 📅 Cronograma
+| Etapa | Entrega |
+| --- | --- |
+| 1 (15/04/2024) | Criação da aplicação base (Models, Repositories e Controllers) |
+| 2 (13/05/2024) | Criação dos relacionamentos e validações |
+
 ## 💻 Tecnologias
 O back-end Java do projeto está sendo desenvolvido desenvolvido utilizando as seguintes tecnologias:
 
