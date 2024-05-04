@@ -35,6 +35,10 @@ public class ProductModel {
     @Column(name="DS_CATEGORY", nullable = false)
     private ProductCategory productCategory;
 
+    @ManyToOne
+    @JoinColumn(name="TB_RESTAURANT_ID_RESTAURANT")
+    private RestaurantModel restaurant;
+
     public ProductModel(RegisterProductDTO registerProduct){
         this.imageUrl = registerProduct.imageUrl();
         this.name = registerProduct.name();

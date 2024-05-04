@@ -26,6 +26,14 @@ public class OrderItemModel {
     @Column(name = "DS_AMOUNT", nullable = false, precision = 3)
     private int amount;
 
+    @ManyToOne
+    @JoinColumn(name="TB_RESTAURANT_ID_RESTAURANT")
+    private RestaurantModel restaurant;
+
+    @ManyToOne
+    @JoinColumn(name="TB_ORDER_ID_ORDER")
+    private OrderModel orderModel;
+
     public OrderItemModel(RegisterOrderItemDTO registerOrderItemDTO){
         this.orderChange = registerOrderItemDTO.changes();
         this.amount = registerOrderItemDTO.amount();

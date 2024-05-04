@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter@Setter
 @AllArgsConstructor@NoArgsConstructor
@@ -41,6 +42,15 @@ public class RestaurantModel {
 
     @Column(name="DS_PASSWORD",nullable = false, length = 255)
     private String password;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<OrderModel> orders;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<ProductModel> products;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<OrderItemModel> orderItemModels;
 
     public RestaurantModel(RegisterRestaurantDTO registerRestaurantDto){
         this.name = registerRestaurantDto.name();

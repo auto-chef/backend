@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
@@ -43,6 +44,9 @@ public class UserModel {
 
     @Column(name="DT_BIRTHDATE", nullable = false)
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<OrderModel> orders;
 
     public UserModel(RegisterUserDTO registerUserDto){
         this.name = registerUserDto.name();
