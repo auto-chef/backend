@@ -27,16 +27,17 @@ public class OrderItemModel {
     private int amount;
 
     @ManyToOne
-    @JoinColumn(name="TB_RESTAURANT_ID_RESTAURANT")
-    private RestaurantModel restaurant;
+    private OrderModel order;
 
     @ManyToOne
-    @JoinColumn(name="TB_ORDER_ID_ORDER")
-    private OrderModel orderModel;
+    private ProductModel product;
 
-    public OrderItemModel(RegisterOrderItemDTO registerOrderItemDTO){
+    public OrderItemModel(RegisterOrderItemDTO registerOrderItemDTO, ProductModel productModel, OrderModel order) {
         this.orderChange = registerOrderItemDTO.changes();
         this.amount = registerOrderItemDTO.amount();
+        this.product = productModel;
+        this.order = order;
+
     }
 
 }

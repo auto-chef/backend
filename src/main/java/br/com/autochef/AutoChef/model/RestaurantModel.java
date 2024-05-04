@@ -49,8 +49,6 @@ public class RestaurantModel {
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<ProductModel> products;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<OrderItemModel> orderItemModels;
 
     public RestaurantModel(RegisterRestaurantDTO registerRestaurantDto){
         this.name = registerRestaurantDto.name();

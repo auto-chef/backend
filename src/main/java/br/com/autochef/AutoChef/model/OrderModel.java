@@ -1,5 +1,6 @@
 package br.com.autochef.AutoChef.model;
 
+import br.com.autochef.AutoChef.dto.order.RegisterOrderDTO;
 import br.com.autochef.AutoChef.dto.order.UpdateOrderDTO;
 import br.com.autochef.AutoChef.enums.OrderStatus;
 import br.com.autochef.AutoChef.repository.OrderRepository;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.catalina.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -33,15 +35,18 @@ public class OrderModel {
     private Integer feedbackRate;
 
     @ManyToOne
-    @JoinColumn(name="TB_USER_ID_USER")
     private UserModel user;
 
     @ManyToOne
-    @JoinColumn(name="TB_RESTAURANT_ID_RESTAURANT")
     private RestaurantModel restaurant;
 
-    @OneToMany(mappedBy = "orderModel", cascade = CascadeType.ALL)
-    private List<OrderItemModel> orderItemModels;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItemModel> orderItems = new ArrayList<>();
+
+    public OrderModel(UserModel user, RestaurantModel restaurant) {
+        this.user = user;
+        this.restaurant = restaurant;
+    }
 
     public void updateData(UpdateOrderDTO updateOrderDTO) {
         if(updateOrderDTO.status() != null) this.status = updateOrderDTO.status();

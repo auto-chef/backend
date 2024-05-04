@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @Getter@Setter
@@ -36,8 +37,10 @@ public class ProductModel {
     private ProductCategory productCategory;
 
     @ManyToOne
-    @JoinColumn(name="TB_RESTAURANT_ID_RESTAURANT")
     private RestaurantModel restaurant;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<OrderItemModel> orderItems;
 
     public ProductModel(RegisterProductDTO registerProduct){
         this.imageUrl = registerProduct.imageUrl();
