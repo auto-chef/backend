@@ -1,5 +1,6 @@
 package br.com.autochef.AutoChef.controller;
 
+import br.com.autochef.AutoChef.dto.order.DetailsOrderDTO;
 import br.com.autochef.AutoChef.dto.user.DetailsUserDTO;
 import br.com.autochef.AutoChef.dto.user.RegisterUserDTO;
 import br.com.autochef.AutoChef.dto.user.UpdateUserDTO;
@@ -58,9 +59,16 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<DetailsUserDTO>> getUserList(Pageable pageable){
-        Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending());
-        var userList = userRepository.findAll(pg).stream().map(DetailsUserDTO::new).toList();
+        var userList = userRepository.findAll(pageable).stream().map(DetailsUserDTO::new).toList();
 
         return ResponseEntity.ok(userList);
+    }
+
+    @GetMapping("{id}/orders")
+    public ResponseEntity<List<DetailsOrderDTO>> getOrdersByUser(@PathVariable("id") Long id){
+        var user = userRepository.getReferenceById(id);
+        var orderList = user.getOrders().stream().map(DetailsOrderDTO::new).toList();
+
+        return ResponseEntity.ok(orderList);
     }
 }
