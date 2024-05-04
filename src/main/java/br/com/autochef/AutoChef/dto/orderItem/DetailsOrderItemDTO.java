@@ -1,13 +1,14 @@
 package br.com.autochef.AutoChef.dto.orderItem;
 
+import br.com.autochef.AutoChef.dto.product.DetailsProductDTO;
 import br.com.autochef.AutoChef.model.OrderItemModel;
+import br.com.autochef.AutoChef.model.ProductModel;
 
 public record DetailsOrderItemDTO(
         Long id,
         String changes,
         int amount,
-        Long productId,
-        Long orderId
+        DetailsProductDTO product
 ) {
     public DetailsOrderItemDTO(OrderItemModel orderItem){
 
@@ -15,8 +16,7 @@ public record DetailsOrderItemDTO(
                 orderItem.getId(),
                 orderItem.getOrderChange(),
                 orderItem.getAmount(),
-                orderItem.getProduct().getId(),
-                orderItem.getOrder().getId()
+                new DetailsProductDTO(orderItem.getProduct())
         );
     }
 }
