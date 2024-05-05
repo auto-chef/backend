@@ -1,4 +1,14 @@
 package br.com.autochef.AutoChef.dto.user;
 
-public record UpdateUserDTO(String name, String email, String password) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record UpdateUserDTO(
+
+        @NotBlank @Size(max=255)
+        String name,
+        @NotBlank @Size(max=255)
+        String email,
+        @NotBlank @Size(max=255)
+        String password) {
 }

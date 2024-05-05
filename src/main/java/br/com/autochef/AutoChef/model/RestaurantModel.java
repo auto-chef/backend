@@ -9,12 +9,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter@Setter
-@AllArgsConstructor@NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-
 @Table(name="TB_RESTAURANT")
 public class RestaurantModel {
     @Id
@@ -47,8 +49,11 @@ public class RestaurantModel {
     private List<OrderModel> orders;
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<ProductModel> products;
+    private List<ProductModel> products = new ArrayList<>();
 
+    public RestaurantModel(ProductModel productModel){
+        this.products.add(productModel);
+    }
 
     public RestaurantModel(RegisterRestaurantDTO registerRestaurantDto){
         this.name = registerRestaurantDto.name();

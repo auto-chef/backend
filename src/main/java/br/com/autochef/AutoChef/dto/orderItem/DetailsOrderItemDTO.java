@@ -4,12 +4,7 @@ import br.com.autochef.AutoChef.dto.product.DetailsProductDTO;
 import br.com.autochef.AutoChef.model.OrderItemModel;
 import br.com.autochef.AutoChef.model.ProductModel;
 
-public record DetailsOrderItemDTO(
-        Long id,
-        String changes,
-        int amount,
-        DetailsProductDTO product
-) {
+public record DetailsOrderItemDTO(Long id, String changes, int amount, DetailsProductDTO product) {
     public DetailsOrderItemDTO(OrderItemModel orderItem){
 
         this(
