@@ -75,5 +75,5 @@ Você pode fazer o download e executar a documentação no Insomnia clicando no 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=AutoChef%20API&uri=https%3A%2F%2Fgithub.com%2Fauto-chef%2Fbackend%2Fblob%2Fmain%2F.github%2Fdocumentacao-rest.json)
 
 ## 📊 Diagramas
-![](.github/diagrama1.jpg)
+![](.github/diagrama3.png)
 ![](.github/diagrama2.png)
