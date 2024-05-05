@@ -42,11 +42,12 @@ public class ProductModel {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<OrderItemModel> orderItems;
 
-    public ProductModel(RegisterProductDTO registerProduct){
+    public ProductModel(RegisterProductDTO registerProduct, RestaurantModel restaurant){
         this.imageUrl = registerProduct.imageUrl();
         this.name = registerProduct.name();
         this.price = registerProduct.price();
         this.productCategory = registerProduct.category();
+        this.restaurant = restaurant;
 
     }
 
