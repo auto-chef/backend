@@ -9,6 +9,7 @@ public record RegisterOrderItemDTO(
         String changes,
         @NotBlank @Size(min=1,max=3)
         int amount,
+        @NotBlank
         Long productId
 ) {
 }

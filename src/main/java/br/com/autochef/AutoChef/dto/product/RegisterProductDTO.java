@@ -6,11 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.DecimalMin;
+import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
 
 public record RegisterProductDTO(
-        @NotBlank @Size(max = 255)
+        @NotBlank @Size(max = 255) @URL
         String imageUrl,
 
         @NotBlank @Size(max = 255)
@@ -19,6 +20,9 @@ public record RegisterProductDTO(
         @NotNull @DecimalMin(value = "0.0", inclusive = false)
         BigDecimal price,
 
-        ProductCategory category
+        ProductCategory category,
+
+        @NotNull
+        Long restaurantId
 ) {
 }

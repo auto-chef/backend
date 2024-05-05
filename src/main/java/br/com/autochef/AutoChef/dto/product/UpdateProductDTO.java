@@ -5,12 +5,13 @@ import br.com.autochef.AutoChef.model.ProductModel;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
 
 public record UpdateProductDTO (
 
-        @Size(max=255)
+        @Size(max=255) @URL
         String imageUrl,
         @Size(max=255)
         String name,
