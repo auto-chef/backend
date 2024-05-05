@@ -1,5 +1,6 @@
 package br.com.autochef.AutoChef.controller;
 
+import br.com.autochef.AutoChef.dto.product.DetailsProductDTO;
 import br.com.autochef.AutoChef.dto.restaurant.DetailsRestaurantDTO;
 import br.com.autochef.AutoChef.dto.restaurant.RegisterRestaurantDTO;
 import br.com.autochef.AutoChef.dto.restaurant.UpdateRestaurantDTO;
@@ -57,7 +58,6 @@ public class RestaurantController {
     @GetMapping("{id}")
     public ResponseEntity<DetailsRestaurantDTO> getRestaurantById(@PathVariable("id") Long id){
         var restaurant = restaurantRepository.getReferenceById(id);
-
         return ResponseEntity.ok(new DetailsRestaurantDTO(restaurant));
     }
 
@@ -66,7 +66,14 @@ public class RestaurantController {
     public ResponseEntity<List<DetailsRestaurantDTO>> getRestaurantList(Pageable pageable){
         Pageable pg = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").ascending());
         var listaRestDto = restaurantRepository.findAll(pg).stream().map(DetailsRestaurantDTO::new).toList();
-        
+
         return ResponseEntity.ok(listaRestDto);
+    }
+    @GetMapping("{id}/products")
+    public ResponseEntity<List<DetailsProductDTO>> getProductsByRestaurant(@PathVariable("id") Long id){
+        var restaurant = restaurantRepository.getReferenceById(id);
+        var productsList = restaurant.getProducts().stream().map(DetailsProductDTO::new).toList();
+
+        return ResponseEntity.ok(productsList);
     }
 }

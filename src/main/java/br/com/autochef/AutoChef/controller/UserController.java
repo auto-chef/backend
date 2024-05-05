@@ -6,6 +6,7 @@ import br.com.autochef.AutoChef.dto.user.RegisterUserDTO;
 import br.com.autochef.AutoChef.dto.user.UpdateUserDTO;
 import br.com.autochef.AutoChef.model.UserModel;
 import br.com.autochef.AutoChef.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,7 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DetailsUserDTO> createUser(@RequestBody RegisterUserDTO registerUserDto, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DetailsUserDTO> createUser(@RequestBody @Valid RegisterUserDTO registerUserDto, UriComponentsBuilder uriBuilder) {
         var user = new UserModel(registerUserDto);
         userRepository.save(user);
 
@@ -35,7 +36,7 @@ public class UserController {
 
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<DetailsUserDTO> updateUser(@PathVariable("id")Long id, @RequestBody UpdateUserDTO udp){
+    public ResponseEntity<DetailsUserDTO> updateUser(@PathVariable("id")Long id, @RequestBody @Valid UpdateUserDTO udp){
         var user = userRepository.getReferenceById(id);
         user.update(udp);
 

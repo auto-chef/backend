@@ -36,7 +36,7 @@ public class ProductController {
 
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<DetailsProductDTO> updateProduct(@PathVariable("id") Long id, @RequestBody UpdateProductDTO updateProductDTO){
+    public ResponseEntity<DetailsProductDTO> updateProduct(@PathVariable("id") Long id, @RequestBody @Valid UpdateProductDTO updateProductDTO){
         var productUpdate = productRepository.getReferenceById(id);
         productUpdate.update(updateProductDTO);
 

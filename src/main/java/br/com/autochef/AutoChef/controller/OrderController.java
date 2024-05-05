@@ -10,6 +10,7 @@ import br.com.autochef.AutoChef.repository.OrderRepository;
 import br.com.autochef.AutoChef.repository.ProductRepository;
 import br.com.autochef.AutoChef.repository.RestaurantRepository;
 import br.com.autochef.AutoChef.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -38,7 +39,7 @@ public class OrderController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DetailsOrderDTO> createOrder(UriComponentsBuilder uriBuilder, @RequestBody RegisterOrderDTO registerOrderDTO) {
+    public ResponseEntity<DetailsOrderDTO> createOrder(UriComponentsBuilder uriBuilder, @RequestBody @Valid RegisterOrderDTO registerOrderDTO) {
         var restaurant = restaurantRepository.getReferenceById(registerOrderDTO.restaurantId());
         var user = userRepository.getReferenceById(registerOrderDTO.userId());
 
@@ -52,7 +53,7 @@ public class OrderController {
 
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<DetailsOrderDTO> updateOrder(@PathVariable("id")Long id, @RequestBody UpdateOrderDTO updateOrderDTO){
+    public ResponseEntity<DetailsOrderDTO> updateOrder(@PathVariable("id")Long id, @RequestBody @Valid UpdateOrderDTO updateOrderDTO){
         var order = orderRepository.getReferenceById(id);
         order.updateData(updateOrderDTO);
 
