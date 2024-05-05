@@ -1,11 +1,13 @@
 package br.com.autochef.AutoChef.controller;
 
+import br.com.autochef.AutoChef.dto.order.DetailsOrderDTO;
 import br.com.autochef.AutoChef.dto.product.DetailsProductDTO;
 import br.com.autochef.AutoChef.dto.restaurant.DetailsRestaurantDTO;
 import br.com.autochef.AutoChef.dto.restaurant.RegisterRestaurantDTO;
 import br.com.autochef.AutoChef.dto.restaurant.UpdateRestaurantDTO;
 import br.com.autochef.AutoChef.model.RestaurantModel;
 import br.com.autochef.AutoChef.repository.RestaurantRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +29,7 @@ public class RestaurantController {
     //Method that will insert a new restaurant
     @PostMapping
     @Transactional
-    public ResponseEntity<DetailsRestaurantDTO> createRestaurant(@RequestBody RegisterRestaurantDTO registerRestaurantDto, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<DetailsRestaurantDTO> createRestaurant(@RequestBody @Valid RegisterRestaurantDTO registerRestaurantDto, UriComponentsBuilder uriBuilder){
         var restaurant = new RestaurantModel(registerRestaurantDto);
         restaurantRepository.save(restaurant);
 
@@ -75,5 +77,12 @@ public class RestaurantController {
         var productsList = restaurant.getProducts().stream().map(DetailsProductDTO::new).toList();
 
         return ResponseEntity.ok(productsList);
+    }
+    @GetMapping("{id}/orders")
+    public ResponseEntity<List<DetailsOrderDTO>> getOrdersByRestaurant(@PathVariable("id") Long id){
+        var restaurant = restaurantRepository.getReferenceById(id);
+        var orderList = restaurant.getOrders().stream().map(DetailsOrderDTO::new).toList();
+
+        return ResponseEntity.ok(orderList);
     }
 }
