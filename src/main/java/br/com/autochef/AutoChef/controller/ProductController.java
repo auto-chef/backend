@@ -5,6 +5,7 @@ import br.com.autochef.AutoChef.dto.product.RegisterProductDTO;
 import br.com.autochef.AutoChef.dto.product.UpdateProductDTO;
 import br.com.autochef.AutoChef.model.ProductModel;
 import br.com.autochef.AutoChef.repository.ProductRepository;
+import br.com.autochef.AutoChef.repository.RestaurantRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -24,10 +25,15 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
     @PostMapping
     @Transactional
     public ResponseEntity<DetailsProductDTO> createProduct(@RequestBody @Valid RegisterProductDTO registerProduct, UriComponentsBuilder uriBuilder){
-        var product = new ProductModel(registerProduct);
+        var restaurant = restaurantRepository.getReferenceById(registerProduct.restaurantId());
+        var product = new ProductModel(registerProduct, restaurant);
+
         productRepository.save(product);
 
         var uri = uriBuilder.path("/products/{id}").buildAndExpand(product.getId()).toUri();
